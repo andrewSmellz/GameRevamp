@@ -33,6 +33,12 @@ target_include_directories(glad PUBLIC external/GLAD/include)
 # -------------------------------------------------------
 add_executable(GameRevamp
         src/main.cpp
+        src/engine/Window.cpp
+        include/engine/Window.h
+        src/engine/Shader.cpp
+        include/engine/Shader.h
+        src/engine/Renderer.cpp
+        include/engine/Renderer.h
 )
 
 # -------------------------------------------------------
