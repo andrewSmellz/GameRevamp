@@ -36,6 +36,10 @@ add_executable(GameRevamp
         include/engine/Shader.h
         src/engine/Renderer.cpp
         include/engine/Renderer.h
+        src/engine/Mesh.cpp
+        include/engine/Mesh.h
+        src/engine/MeshFactory.cpp
+        include/engine/MeshFactory.h
 )
 
 

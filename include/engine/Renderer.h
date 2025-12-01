@@ -1,6 +1,8 @@
 #ifndef GAMEREVAMP_RENDERER_H
 #define GAMEREVAMP_RENDERER_H
 #include <glm/glm.hpp>
+
+#include "Mesh.h"
 #include "engine/Shader.h"
 
 class Renderer {
@@ -11,12 +13,7 @@ public:
 
     static void clear();
 
-    void drawTriangle(const Shader &shader, const glm::mat4 &transform) const;
-
-private:
-    unsigned int VAO, VBO;
-
-    void testInitTriangle();
+    void draw(const Mesh &mesh, const Shader &shader, const glm::mat4 &transform) const;
 };
 
 
