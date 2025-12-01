@@ -42,8 +42,9 @@ void Renderer::testInitTriangle() {
 }
 
 
-void Renderer::drawTestTriangle(const Shader &shader) const {
+void Renderer::drawTriangle(const Shader &shader, const glm::mat4 &mat) const {
     shader.use();
+    shader.setMat4("model", mat);
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);

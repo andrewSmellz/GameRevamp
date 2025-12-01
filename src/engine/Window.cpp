@@ -26,7 +26,7 @@ Window::Window(const int w, const int h, const std::string &title) : width(w), h
     glfwSwapInterval(1);
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallBack);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         std::cout << "Failed to load GLAD." << std::endl;
         glfwTerminate();
         exit(EXIT_FAILURE);
@@ -38,7 +38,7 @@ Window::~Window() {
     glfwTerminate();
 }
 
-void Window::framebufferSizeCallBack(GLFWwindow *window, int width, int height) {
+void Window::framebufferSizeCallBack(GLFWwindow *window, const int width, const int height) {
     glViewport(0, 0, width, height);
 }
 

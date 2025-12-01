@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 project(GameRevamp VERSION 1.0)
 
@@ -12,11 +12,16 @@ include(FetchContent)
 FetchContent_Declare(
         glfw
         GIT_REPOSITORY https://github.com/glfw/glfw.git
-        GIT_TAG latest
+        GIT_TAG 3.4
 )
 
+FetchContent_Declare(
+        glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG 1.0.1
+)
 
-FetchContent_MakeAvailable(glfw)
+FetchContent_MakeAvailable(glfw glm)
 
 
 add_library(glad external/GLAD/src/glad.c)
@@ -37,6 +42,7 @@ add_executable(GameRevamp
 target_link_libraries(GameRevamp
         glad
         glfw
+        glm::glm
         opengl32
 )
 
