@@ -4,7 +4,8 @@
 
 // Constructor for no EBO or indexing
 Mesh::Mesh(const std::vector<float> &vertices, int stride)
-    : VAO(0), VBO(0), EBO(0), vertexCount(0), stride(stride), useIndices(false), indexCount(0) {
+    : VAO(0), VBO(0), EBO(0), vertexCount(0), stride(stride), useIndices(false), indexCount(0), color(glm::vec3(1.0f)),
+      useTexture(false) {
     vertexCount = vertices.size() / stride;
 
     glGenVertexArrays(1, &VAO);
@@ -17,8 +18,8 @@ Mesh::Mesh(const std::vector<float> &vertices, int stride)
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), static_cast<void *>(0));
     glEnableVertexAttribArray(0);
 
-    if (stride > 3) {
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float),
+    if (stride >= 5) {
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride * sizeof(float),
                               reinterpret_cast<void *>(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
     }
@@ -29,7 +30,8 @@ Mesh::Mesh(const std::vector<float> &vertices, int stride)
 
 // Constructor with EBO for indexed drawing
 Mesh::Mesh(const std::vector<float> &vertices, const std::vector<unsigned int> &indices, int stride)
-    : VAO(0), VBO(0), EBO(0), vertexCount(0), stride(stride), useIndices(true), indexCount(0) {
+    : VAO(0), VBO(0), EBO(0), vertexCount(0), stride(stride), useIndices(true), indexCount(0), color(glm::vec3(1.0f)),
+      useTexture(false) {
     vertexCount = vertices.size() / stride;
     indexCount = indices.size();
 
@@ -47,8 +49,8 @@ Mesh::Mesh(const std::vector<float> &vertices, const std::vector<unsigned int> &
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), static_cast<void *>(0));
     glEnableVertexAttribArray(0);
 
-    if (stride > 3) {
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float),
+    if (stride >= 5) {
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride * sizeof(float),
                               reinterpret_cast<void *>(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
     }
@@ -83,6 +85,24 @@ void Mesh::draw() const {
         glDrawArrays(GL_TRIANGLES, 0, vertexCount);
     }
 }
+
+glm::vec3 Mesh::getColor() const {
+    return color;
+}
+
+void Mesh::setColor(const glm::vec3 newColor) {
+    this->color = newColor;
+}
+
+void Mesh::setUseTexture(bool use) {
+    useTexture = use;
+}
+
+bool Mesh::getUseTexture() const {
+    return useTexture;
+}
+
+
 
 
 

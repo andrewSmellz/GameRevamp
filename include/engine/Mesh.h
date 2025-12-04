@@ -2,6 +2,8 @@
 #define GAMEREVAMP_MESH_H
 #include <vector>
 
+#include "glm/vec3.hpp"
+
 
 class Mesh {
 public:
@@ -19,12 +21,22 @@ public:
 
     void draw() const;
 
+    void setColor(glm::vec3 newColor);
+
+    glm::vec3 getColor() const;
+
+    void setUseTexture(bool use);
+
+    bool getUseTexture() const;
+
 private:
     unsigned int VAO, VBO, EBO;
     int vertexCount;
     int stride;
     bool useIndices;
     int indexCount;
+    glm::vec3 color;
+    bool useTexture;
 };
 
 
